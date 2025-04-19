@@ -7,6 +7,8 @@
 
 This is my solution to the first programming assignment of the **CS913P** course held by **Paul Hegarty** at the Stanford University and which you can attend via the iTunesU app on your iPad/iPhone.
 
+Additionally, I am testing automated code reviews using these models.
+
 ## The Project
 The project is composed by eight required tasks and three optional tasks, I went only through the required ones which are the following:
 
