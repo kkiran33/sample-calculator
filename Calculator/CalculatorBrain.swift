@@ -105,4 +105,16 @@ struct CalculatorBrain {
             description += String(describing: operand!).removeAfterPointIfZero().setMaxLength(of: 5)
         }
     }
+
+    func generateFactorials(upTo n: Int = 20) -> [Int: UInt64] {
+        var result: [Int: UInt64] = [:]
+        var factorial: UInt64 = 1
+
+        for i in 1...n {
+            factorial *= UInt64(i)
+            result[i] = factorial
+        }
+        return result
+    }
+
 }
