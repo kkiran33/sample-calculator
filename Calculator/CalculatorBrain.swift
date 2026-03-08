@@ -36,6 +36,11 @@ struct CalculatorBrain {
          "√" : .unaryOperation({ sqrt($0) }),
          "±" : .unaryOperation({ -$0 }),
          "﹪" : .unaryOperation({ $0 / 100 }),
+         "x²" : .unaryOperation({ $0 * $0 }),
+         "n!" : .unaryOperation({ n in
+             guard n >= 0, n == floor(n), n <= 20 else { return Double.nan }
+             return (1...Int(n)).reduce(1.0) { $0 * Double($1) }
+         }),
          "AC": .constant(0),
          "=" : .result
     ]
@@ -106,15 +111,5 @@ struct CalculatorBrain {
         }
     }
 
-    func generateFactorials(upTo n: Int = 20) -> [Int: UInt64] {
-        var result: [Int: UInt64] = [:]
-        var factorial: UInt64 = 1
-
-        for i in 1...n {
-            factorial *= UInt64(i)
-            result[i] = factorial
-        }
-        return result
-    }
 
 }
