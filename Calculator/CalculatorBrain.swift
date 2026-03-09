@@ -28,6 +28,9 @@ struct CalculatorBrain {
         case result
     }
     
+    // Maximum n for which n! fits exactly in a Double
+    private static let factorialMaxInput: Int = 20
+
     private var operations: Dictionary<String, Operation> = [
         "＋" : .binaryOperation({ $0 + $1 }),
         "﹣" : .binaryOperation({ $0 - $1 }),
@@ -36,6 +39,12 @@ struct CalculatorBrain {
          "√" : .unaryOperation({ sqrt($0) }),
          "±" : .unaryOperation({ -$0 }),
          "﹪" : .unaryOperation({ $0 / 100 }),
+         "x²" : .unaryOperation({ $0 * $0 }),
+         "n!" : .unaryOperation({ n in
+             guard n >= 0, n == floor(n), n <= Double(CalculatorBrain.factorialMaxInput) else { return Double.nan }
+             if n == 0 { return 1.0 } // 0! = 1 by definition
+             return (1...Int(n)).reduce(1.0) { $0 * Double($1) }
+         }),
          "AC": .constant(0),
          "=" : .result
     ]
@@ -105,4 +114,6 @@ struct CalculatorBrain {
             description += String(describing: operand!).removeAfterPointIfZero().setMaxLength(of: 5)
         }
     }
+
+
 }
