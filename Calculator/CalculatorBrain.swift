@@ -38,7 +38,9 @@ struct CalculatorBrain {
          "﹪" : .unaryOperation({ $0 / 100 }),
          "x²" : .unaryOperation({ $0 * $0 }),
          "n!" : .unaryOperation({ n in
+             // Only non-negative integers up to 20 are supported (20! is the max that fits in Double exactly)
              guard n >= 0, n == floor(n), n <= 20 else { return Double.nan }
+             if n == 0 { return 1.0 } // 0! = 1 by definition
              return (1...Int(n)).reduce(1.0) { $0 * Double($1) }
          }),
          "AC": .constant(0),
