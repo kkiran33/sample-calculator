@@ -41,6 +41,18 @@ class CalculatorBrainTests: XCTestCase {
         XCTAssertEqual(brain.result, 6.25)
     }
 
+    func testSquare_largeNumber() {
+        brain.setOperand(1_000_000)
+        brain.performOperation("x²")
+        XCTAssertEqual(brain.result, 1_000_000_000_000)
+    }
+
+    func testSquare_infinity_remainsInfinity() {
+        brain.setOperand(Double.infinity)
+        brain.performOperation("x²")
+        XCTAssertEqual(brain.result, Double.infinity)
+    }
+
     // MARK: - n! Tests
 
     func testFactorial_zero() {
